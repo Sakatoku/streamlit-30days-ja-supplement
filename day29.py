@@ -24,7 +24,7 @@ with c2:
 
 # サイドバーにメニューを表示
 with st.sidebar:
-    selected = option_menu(
+    selected_model = option_menu(
         '',
         ['Japanese Model', 'Original Model'],
         icons=['globe-asia-australia', 'globe-americas'],
@@ -42,15 +42,15 @@ headers = {'Authorization': 'Bearer {}'.format(api_token)}
 # APIのURLを選択
 api_url_japanese = 'https://api-inference.huggingface.co/models/MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7'
 api_url_original = 'https://api-inference.huggingface.co/models/valhalla/distilbart-mnli-12-3'
-if selected == 'Japanese Model':
+if selected_model == 'Japanese Model':
     api_url = api_url_japanese
 else:
     api_url = api_url_original
 
 # Hugging Face APIを呼び出す関数。Hugging Faceのサイトで生成されるサンプルコードそのまま
 def query(payload):
-	response = requests.post(api_url, headers=headers, json=payload)
-	return response.json()
+    response = requests.post(api_url, headers=headers, json=payload)
+    return response.json()
 
 # サンプルの文章
 sample1 = '国の特別天然記念物ライチョウを長野県の中央アルプスへ返す取り組みを続けている那須どうぶつ王国。先月8月に生まれたライチョウのヒナ3羽がそろって生後1カ月を迎えた。'
